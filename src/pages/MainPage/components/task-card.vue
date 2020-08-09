@@ -15,7 +15,7 @@
         ul.card-checklist__list
           li.card-checklist__item(
           v-for="item in checklist"
-          :class="{'checklist__item_checked' : item.checked}"
+          :class="{'card-checklist__item_checked' : item.checked}"
           ) {{item.title}}
 
 </template>
