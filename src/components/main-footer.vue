@@ -6,8 +6,8 @@
           :to="{name: 'MainPage'}"
         ) ToDo
       a.footer__copyright(
-        href="mailto:aleksndr.azdakhov@gmail.com"
-      ) aleksndr.azdakhov@gmail.com
+        href="mailto:aleksandr.azdakhov@gmail.com"
+      ) aleksandr.azdakhov@gmail.com
 </template>
 
 <script>

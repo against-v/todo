@@ -46,8 +46,8 @@ export default {
     isEdit() {
       return this.$route.params.id !== "new";
     },
-    id() {
-      return this.isEdit ? this.$route.params.id : this.taskList.length + 1;
+    index() {
+      return this.isEdit ? this.$route.params.id - 1 : -1;
     }
   },
   data() {
@@ -69,16 +69,17 @@ export default {
     },
     onSaveTask() {
       this.saveTask({
-        title: this.title,
-        checklist: this.checklist,
-        id: this.id
+        task: {
+          title: this.title,
+          checklist: this.checklist
+        },
+        index: this.index
       });
     }
   },
   created() {
     if (this.isEdit) {
-      console.log(this.id)
-      const task = this.taskList[this.id - 1];
+      const task = this.taskList[this.index];
       this.title = task.title;
       this.checklist = task.checklist;
     }

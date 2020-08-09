@@ -6,10 +6,11 @@
       ) Добавить новый список
     ul.task-list
       li.task-list__item(
-        v-for="card in taskList"
+        v-for="(card, $index) in taskList"
       )
         task-card(
         :card="card"
+        :index="$index"
         )
 </template>
 

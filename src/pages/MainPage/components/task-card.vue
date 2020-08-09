@@ -4,10 +4,10 @@
       h2.card__title {{card.title}}
       .card__controls
         router-link.button-square.button-square_edit(
-        :to="{name: 'TaskEditor', params: {id: card.id}}"
+        :to="{name: 'TaskEditor', params: {id: index + 1}}"
         )
         button.button-square.button-square_remove(
-        @click.prevent="onRemoveCard(card.id)"
+        @click.prevent="onRemoveCard(index)"
         )
     .card__body
       .card__checklist.card-checklist
@@ -27,6 +27,10 @@ export default {
     card: {
       type: Object,
       default: () => ({})
+    },
+    index: {
+      type: Number,
+      default: 0
     }
   },
   computed: {

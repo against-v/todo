@@ -9,7 +9,7 @@ export default new Vuex.Store({
   },
   mutations: {
     saveTask(state, data) {
-      state.taskList[data.id - 1] = data;
+      data.index > -1 ? state.taskList[data.index] = data.task : state.taskList.push(data.task);
       window.localStorage.taskList = JSON.stringify(state.taskList);
     },
   }
