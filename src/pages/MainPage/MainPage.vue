@@ -1,5 +1,5 @@
 <template lang="pug">
-  div main page
+  div main page2
 </template>
 
 <script>
