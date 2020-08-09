@@ -4,7 +4,7 @@
       h2.card__title {{card.title}}
       .card__controls
         router-link.button-square.button-square_edit(
-        :to="{name: 'TaskPage', params: {id: card.id}}"
+        :to="{name: 'TaskEditor', params: {id: card.id}}"
         )
         button.button-square.button-square_remove(
         @click.prevent="onRemoveCard(card.id)"

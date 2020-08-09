@@ -1,8 +1,8 @@
 <template lang="pug">
   .container
-    .add-new-task
+    .button-container
       router-link.button.button_full.button_paint-main(
-      :to="{name: 'TaskPage', params: {id: 'new'}}"
+      :to="{name: 'TaskEditor', params: {id: 'new'}}"
       ) Добавить новый список
     ul.task-list
       li.task-list__item(
@@ -22,23 +22,23 @@ export default {
     return {
       cards: [
         {
-            id: 1,
-            title: "Название карточки",
-            checklist: [
-              {
-                title: "Сделать первое",
-                checked: false
-              },
-              {
-                title: "Сделать второе",
-                checked: false
-              },
-              {
-                title: "Сделать третье",
-                checked: false
-              }
-            ]
-          },
+          id: 1,
+          title: "Название карточки",
+          checklist: [
+            {
+              title: "Сделать первое",
+              checked: false
+            },
+            {
+              title: "Сделать второе",
+              checked: false
+            },
+            {
+              title: "Сделать третье",
+              checked: false
+            }
+          ]
+        }
       ]
       // cards: [
       //   {

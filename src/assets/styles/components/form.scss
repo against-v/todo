@@ -26,3 +26,59 @@
   font-family: $font-family;
   padding: 4px;
 }
+
+.checklist__item {
+  margin-bottom: 10px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+.check-el {
+  display: flex;
+  align-items: center;
+  line-height: 0;
+  .input {
+    height: 30px;
+    border-color: transparent;
+    flex-grow: 1;
+    outline: none;
+    &:focus {
+      border-color: $color-line;
+    }
+  }
+}
+.check-el__checkbox {
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+.check-el__input {
+  flex-grow: 1;
+}
+.check-el__button {
+  flex-shrink: 0;
+  margin-left: 10px;
+}
+
+.checkbox {
+  cursor: pointer;
+  position: relative;
+}
+.checkbox__icon {
+  width: 20px;
+  height: 20px;
+  background-image: url('../images/icons/checkbox-normal.svg');
+  background-size: contain;
+}
+.checkbox__input {
+  @include hidden-input;
+  &:focus {
+    & ~ .checkbox__icon {
+      @include a-outline;
+    }
+  }
+  &:checked {
+    & ~ .checkbox__icon {
+      background-image: url('../images/icons/checkbox-active.svg');
+    }
+  }
+}

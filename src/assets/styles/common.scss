@@ -90,6 +90,7 @@ body {
   color: $color-black;
   cursor: pointer;
   user-select: none;
+  padding: 0 10px;
   &_full {
     width: 100%;
   }
@@ -117,7 +118,7 @@ body {
     background-image: url('../images/icons/icon-remove.svg');
   }
 }
-.add-new-task {
+.button-container {
   width: 100%;
   max-width: 300px;
   margin: 20px auto;

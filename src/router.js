@@ -2,7 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 
 import MainPage from "./pages/MainPage/MainPage.vue";
-import TaskPage from "./pages/TaskPage/TaskPage.vue";
+import TaskEditor from "./pages/TaskEditor/TaskEditor.vue";
 
 Vue.use(Router);
 
@@ -18,8 +18,8 @@ const routes = [
   },
   {
     path: "/task/:id",
-    name: "TaskPage",
-    component: TaskPage
+    name: "TaskEditor",
+    component: TaskEditor
   }
 ];
 
