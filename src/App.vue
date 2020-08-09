@@ -7,6 +7,7 @@
         router-view
       .page__footer
         main-footer
+
 </template>
 
 <script>

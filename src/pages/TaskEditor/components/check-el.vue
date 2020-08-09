@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: "CheckEl",
+  name: "check-el",
   props: {
     data: {
       type: Object,

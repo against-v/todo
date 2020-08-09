@@ -22,7 +22,7 @@
 
 <script>
 export default {
-  name: "TaskCard",
+  name: "task-card",
   props: {
     card: {
       type: Object,
