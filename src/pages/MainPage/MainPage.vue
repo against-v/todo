@@ -1,10 +1,16 @@
 <template lang="pug">
   .container
+    .add-new-task
+      router-link.button.button_full.button_paint-main(
+      :to="{name: 'TaskPage', params: {id: 'new'}}"
+      ) Добавить новый список
     ul.task-list
       li.task-list__item(
         v-for="card in cards"
       )
-        task-card
+        task-card(
+        :card="card"
+        )
 </template>
 
 <script>
@@ -87,15 +93,7 @@ export default {
           checklist: [
             {
               title: "Сделать первое",
-              checked: false
-            },
-            {
-              title: "Сделать второе",
-              checked: false
-            },
-            {
-              title: "Сделать третье",
-              checked: false
+              checked: true
             }
           ]
         },

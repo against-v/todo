@@ -2,15 +2,22 @@
   border: 1px solid $color-line;
   border-radius: 4px;
   padding: 10px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
 }
 .card__header {
   display: flex;
+  align-items: center;
+  margin-bottom: 20px;
 }
 .card__controls {
   flex-shrink: 0;
   line-height: 0;
+  display: flex;
   .button-square {
-    margin-left: 20px;
+    flex-shrink: 0;
+    margin-left: 10px;
   }
 }
 .card__title {
@@ -18,4 +25,63 @@
   margin-bottom: 0;
   margin-right: auto;
   font-size: 24px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.card__body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: calc(100% - 50px);
+}
+.card__desc {
+  margin-top: 0;
+  margin-bottom: 20px;
+  overflow: auto;
+}
+.card__checklist {
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+.checklist {
+  min-height: 120px;
+}
+.checklist__title {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+.checklist__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.checklist__item {
+  line-height: 1.2;
+  margin-bottom: 4px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-left: 24px;
+  position: relative;
+  &::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 2px;
+    left: 0;
+    border-radius: 50%;
+    background-color: $color-grey;
+  }
+  &:last-child {
+    margin-bottom: 0;
+  }
+  &_checked {
+    &::before {
+      background-color: $color-main;
+    }
+  }
 }
