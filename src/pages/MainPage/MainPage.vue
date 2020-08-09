@@ -20,120 +20,121 @@ export default {
   components: { TaskCard },
   data() {
     return {
-      cards: [
-        {
-          id: 1,
-          title: "Название карточки",
-          checklist: [
-            {
-              title: "Сделать первое",
-              checked: false
-            },
-            {
-              title: "Сделать второе",
-              checked: false
-            },
-            {
-              title: "Сделать третье",
-              checked: false
-            }
-          ]
-        },
-        {
-          id: 2,
-          title: "Название карточки 2",
-          checklist: [
-            {
-              title: "Сделать первое",
-              checked: false
-            },
-            {
-              title: "Сделать второе",
-              checked: false
-            },
-            {
-              title: "Сделать второе",
-              checked: false
-            },
-            {
-              title: "Сделать второе",
-              checked: false
-            },
-            {
-              title: "Сделать второе",
-              checked: false
-            },
-            {
-              title: "Сделать третье",
-              checked: false
-            }
-          ]
-        },
-        {
-          id: 3,
-          title: "Название карточки 3",
-          checklist: [
-            {
-              title: "Сделать первое",
-              checked: false
-            },
-            {
-              title: "Сделать второе",
-              checked: false
-            },
-            {
-              title: "Сделать третье",
-              checked: false
-            }
-          ]
-        },
-        {
-          id: 4,
-          title: "Название карточки 3",
-          checklist: [
-            {
-              title: "Сделать первое",
-              checked: true
-            }
-          ]
-        },
-        {
-          id: 5,
-          title: "Название карточки 3",
-          checklist: [
-            {
-              title: "Сделать первое",
-              checked: false
-            },
-            {
-              title: "Сделать второе",
-              checked: false
-            },
-            {
-              title: "Сделать третье",
-              checked: false
-            }
-          ]
-        },
-        {
-          id: 6,
-          title: "Название карточки 6",
-          checklist: [
-            {
-              title: "Сделать первое",
-              checked: false
-            },
-            {
-              title: "Сделать второе",
-              checked: false
-            },
-            {
-              title: "Сделать третье",
-              checked: false
-            }
-          ]
-        },
-      ]
+      cards: []
+      // cards: [
+      //   {
+      //     id: 1,
+      //     title: "Название карточки",
+      //     checklist: [
+      //       {
+      //         title: "Сделать первое",
+      //         checked: false
+      //       },
+      //       {
+      //         title: "Сделать второе",
+      //         checked: false
+      //       },
+      //       {
+      //         title: "Сделать третье",
+      //         checked: false
+      //       }
+      //     ]
+      //   },
+      //   {
+      //     id: 2,
+      //     title: "Название карточки 2",
+      //     checklist: [
+      //       {
+      //         title: "Сделать первое",
+      //         checked: false
+      //       },
+      //       {
+      //         title: "Сделать второе",
+      //         checked: false
+      //       },
+      //       {
+      //         title: "Сделать второе",
+      //         checked: false
+      //       },
+      //       {
+      //         title: "Сделать второе",
+      //         checked: false
+      //       },
+      //       {
+      //         title: "Сделать второе",
+      //         checked: false
+      //       },
+      //       {
+      //         title: "Сделать третье",
+      //         checked: false
+      //       }
+      //     ]
+      //   },
+      //   {
+      //     id: 3,
+      //     title: "Название карточки 3",
+      //     checklist: [
+      //       {
+      //         title: "Сделать первое",
+      //         checked: false
+      //       },
+      //       {
+      //         title: "Сделать второе",
+      //         checked: false
+      //       },
+      //       {
+      //         title: "Сделать третье",
+      //         checked: false
+      //       }
+      //     ]
+      //   },
+      //   {
+      //     id: 4,
+      //     title: "Название карточки 3",
+      //     checklist: [
+      //       {
+      //         title: "Сделать первое",
+      //         checked: true
+      //       }
+      //     ]
+      //   },
+      //   {
+      //     id: 5,
+      //     title: "Название карточки 3",
+      //     checklist: [
+      //       {
+      //         title: "Сделать первое",
+      //         checked: false
+      //       },
+      //       {
+      //         title: "Сделать второе",
+      //         checked: false
+      //       },
+      //       {
+      //         title: "Сделать третье",
+      //         checked: false
+      //       }
+      //     ]
+      //   },
+      //   {
+      //     id: 6,
+      //     title: "Название карточки 6",
+      //     checklist: [
+      //       {
+      //         title: "Сделать первое",
+      //         checked: false
+      //       },
+      //       {
+      //         title: "Сделать второе",
+      //         checked: false
+      //       },
+      //       {
+      //         title: "Сделать третье",
+      //         checked: false
+      //       }
+      //     ]
+      //   },
+      // ]
     };
   }
 };
