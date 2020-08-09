@@ -45,20 +45,20 @@
   flex-shrink: 0;
 }
 
-.checklist {
+.card-checklist {
   min-height: 120px;
 }
-.checklist__title {
+.card-checklist__title {
   margin-top: 0;
   margin-bottom: 10px;
   font-size: 20px;
 }
-.checklist__list {
+.card-checklist__list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-.checklist__item {
+.card-checklist__item {
   line-height: 1.2;
   margin-bottom: 4px;
   text-overflow: ellipsis;

@@ -20,7 +20,26 @@ export default {
   components: { TaskCard },
   data() {
     return {
-      cards: []
+      cards: [
+        {
+            id: 1,
+            title: "Название карточки",
+            checklist: [
+              {
+                title: "Сделать первое",
+                checked: false
+              },
+              {
+                title: "Сделать второе",
+                checked: false
+              },
+              {
+                title: "Сделать третье",
+                checked: false
+              }
+            ]
+          },
+      ]
       // cards: [
       //   {
       //     id: 1,
