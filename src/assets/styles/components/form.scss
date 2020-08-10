@@ -27,6 +27,22 @@
   padding: 4px;
 }
 
+.checklist__add {
+  margin-bottom: 10px;
+}
+.checklist-add {
+  display: flex;
+}
+.checklist-add__input {
+  flex-grow: 1;
+}
+.checklist-add__button {
+  flex-shrink: 0;
+  margin-left: 10px;
+  .button {
+    min-height: 40px;
+  }
+}
 .checklist__item {
   margin-bottom: 10px;
   &:last-child {

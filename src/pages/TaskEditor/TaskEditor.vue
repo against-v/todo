@@ -11,6 +11,15 @@
         .form-el__title Чеклист
         .form-el__body
           .checklist
+            .checklist__add.checklist-add
+              .checklist-add__input
+                input.input(
+                v-model="checkListInput"
+                )
+              .checklist-add__button
+                button.button(
+                  @click.prevent="onAddCheckEl"
+                ) Добавить пункт
             .checklist__item(
               v-for="(item, $index) in checklist"
             )
@@ -20,9 +29,7 @@
               @on-change="onChangeCheckEl"
               )
             .checklist__item.checklist__item_button
-              button.button(
-              @click.prevent="onAddCheckEl"
-              ) Добавить пункт
+
     .button-container
       button.button.button_full(
         @click.prevent="confirmRemove"
@@ -57,7 +64,8 @@ export default {
   data() {
     return {
       title: "",
-      checklist: []
+      checklist: [],
+      checkListInput: ""
     };
   },
   methods: {
@@ -65,21 +73,24 @@ export default {
     ...mapActions(["createTask", "removeTask"]),
     onAddCheckEl() {
       this.checklist.push({
-        title: "",
+        title: this.checkListInput,
         checked: false
       });
+      this.checkListInput = "";
     },
     onChangeCheckEl(value, field, index) {
       this.checklist[index][field] = value;
     },
     onSaveTask() {
+      const index = this.index < 0 ? this.taskList.length : this.index;
       this.createTask({
         task: {
           title: this.title,
           checklist: this.checklist
         },
-        index: this.index
+        index: index
       });
+      this.$router.replace({name: "TaskEditor", params: {id: index + 1}});
     },
     confirmRemove() {
       this.toggleConfirmModal({

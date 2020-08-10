@@ -14,7 +14,8 @@ export default new Vuex.Store({
   },
   mutations: {
     addTaskToTaskList(state, data) {
-      data.index > -1 ? state.taskList[data.index] = data.task : state.taskList.push(data.task);
+      state.taskList[data.index] = data.task;
+      // data.index > -1 ? state.taskList[data.index] = data.task : state.taskList.push(data.task);
     },
     removeTaskFromTaskList(state, index) {
       state.taskList.splice(index, 1);
