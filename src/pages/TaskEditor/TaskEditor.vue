@@ -24,13 +24,17 @@
               @click.prevent="onAddCheckEl"
               ) Добавить пункт
     .button-container
+      button.button.button_full(
+        @click.prevent="confirmRemove"
+      ) Удалить
+    .button-container
       button.button.button_full.button_paint-main(
       @click.prevent="onSaveTask"
       ) Сохранить
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import {mapState, mapActions, mapMutations} from "vuex";
 import CheckEl from "@/pages/TaskEditor/components/check-el";
 export default {
   name: "TaskPage",
@@ -57,7 +61,8 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["createTask"]),
+    ...mapMutations(["toggleConfirmModal"]),
+    ...mapActions(["createTask", "removeTask"]),
     onAddCheckEl() {
       this.checklist.push({
         title: "",
@@ -75,6 +80,21 @@ export default {
         },
         index: this.index
       });
+    },
+    confirmRemove() {
+      this.toggleConfirmModal({
+        show: true,
+        text: "Вы действительно хотите удалить список?",
+        confirmFunc: {
+          func: this.onRemoveTask,
+          params: [this.index]
+        }
+      })
+    },
+    onRemoveTask(index) {
+      this.$router.push({name: "MainPage"});
+      this.removeTask(index);
+      this.toggleConfirmModal({show: false});
     }
   },
   created() {
