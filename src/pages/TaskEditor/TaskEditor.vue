@@ -5,7 +5,7 @@
         .form-el__title Название
         .form-el__body
           input.input(
-          v-model="title"
+          v-model="localTask.title"
           )
       .form__el.form-el
         .form-el__title Чеклист
@@ -21,7 +21,7 @@
                   @click.prevent="onAddCheckEl"
                 ) Добавить пункт
             .checklist__item(
-              v-for="(item, $index) in checklist"
+              v-for="(item, $index) in localTask.checklist"
             )
               check-el(
               :data="item"
@@ -64,40 +64,59 @@ export default {
     },
     index() {
       return this.isEdit ? this.$route.params.id - 1 : -1;
+    },
+    isChanged() {
+      const original = this.taskBeforeChanges;
+      if (original.title !== this.title) {
+        return true;
+      }
+      if (original.checklist.length !== this.checklist.length) {
+        return true;
+      }
+      original.checklist.forEach((item, i) => {
+        if (item.title !== this.checklist[i].title) {
+          return true;
+        }
+        if (item.checked !== this.checklist[i].checked) {
+          return true;
+        }
+      })
+      return false;
     }
   },
   data() {
     return {
-      title: "",
-      checklist: [],
+      localTask: {
+        title: "",
+        checklist: [],
+      },
       checkListInput: "",
-      taskBeforeChanges: null
+      taskBeforeChanges: null,
+      requireCheck: true
     };
   },
   methods: {
     ...mapMutations(["toggleConfirmModal"]),
     ...mapActions(["createTask", "removeTask"]),
     onAddCheckEl() {
-      this.checklist.push({
+      this.localTask.checklist.push({
         title: this.checkListInput,
         checked: false
       });
       this.checkListInput = "";
     },
     onChangeCheckEl(value, field, index) {
-      this.checklist[index][field] = value;
+      this.localTask.checklist[index][field] = value;
     },
     onRemoveCheckEl(index) {
-      this.checklist.splice(index, 1);
+      this.localTask.checklist.splice(index, 1);
     },
     onSaveTask() {
       this.createTask({
-        task: {
-          title: this.title,
-          checklist: this.checklist
-        },
+        task: this.localTask,
         index: this.index
       });
+      this.requireCheck = false;
       this.$router.push({name: "MainPage"});
     },
     confirmRemove() {
@@ -111,26 +130,51 @@ export default {
       })
     },
     onRemoveTask(index) {
+      this.requireCheck = false;
       this.$router.push({name: "MainPage"});
       this.removeTask(index);
+    },
+    checkChanges() {
+      const original = this.taskBeforeChanges;
+      const current = this.localTask;
+      if (original.title !== current.title) {
+        return true;
+      }
+      if (original.checklist.length !== current.checklist.length) {
+        return true;
+      }
+      const diff = original.checklist.findIndex((item, i) => {
+        return item.title !== current.checklist[i].title || item.checked !== current.checklist[i].checked;
+      });
+      if (diff > -1) {
+        return true;
+      }
+      return false;
     }
   },
   created() {
     if (this.isEdit) {
-      const task = this.taskList[this.index];
-      this.title = task.title;
-      this.checklist = task.checklist;
-      this.taskBeforeChanges = Object.assign({}, task);
+      this.localTask = JSON.parse(JSON.stringify(this.taskList[this.index]));
     }
+    this.taskBeforeChanges = JSON.parse(JSON.stringify(this.localTask));
   },
   beforeRouteLeave(to, from, next) {
-    this.toggleConfirmModal({
-      show: true,
-      text: "Несохраненные изменения удалятся. Вы действительно хотите вернуться к списку?",
-      confirmFunc: {
-        func: next
-      }
-    });
+    const revertChanges = () => {
+      this.localTask = JSON.parse(JSON.stringify(this.taskBeforeChanges));
+      next();
+    };
+    if (this.requireCheck && this.checkChanges()) {
+      this.toggleConfirmModal({
+        show: true,
+        text: "Несохраненные изменения удалятся. Вы действительно хотите вернуться к списку?",
+        confirmFunc: {
+          func: revertChanges
+        }
+      });
+    } else {
+      next();
+    }
+
   }
 };
 </script>
