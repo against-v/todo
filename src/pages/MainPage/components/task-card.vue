@@ -52,14 +52,10 @@ export default {
         show: true,
         text: "Вы действительно хотите удалить список?",
         confirmFunc: {
-          func: this.onRemoveTask,
+          func: this.removeTask,
           params: [this.index]
         }
       })
-    },
-    onRemoveTask(index) {
-      this.removeTask(index);
-      this.toggleConfirmModal({show: false});
     }
 
   }

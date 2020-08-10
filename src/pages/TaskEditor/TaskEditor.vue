@@ -30,9 +30,13 @@
               @remove="onRemoveCheckEl"
               )
             .checklist__item.checklist__item_button
-
     .button-container
       button.button.button_full(
+        @click.prevent="$router.push({name: 'MainPage'})"
+      ) Вернуться к списку
+    .button-container
+      button.button.button_full(
+        v-if="isEdit"
         @click.prevent="confirmRemove"
       ) Удалить
     .button-container
@@ -66,7 +70,8 @@ export default {
     return {
       title: "",
       checklist: [],
-      checkListInput: ""
+      checkListInput: "",
+      taskBeforeChanges: null
     };
   },
   methods: {
@@ -108,7 +113,6 @@ export default {
     onRemoveTask(index) {
       this.$router.push({name: "MainPage"});
       this.removeTask(index);
-      this.toggleConfirmModal({show: false});
     }
   },
   created() {
@@ -116,7 +120,17 @@ export default {
       const task = this.taskList[this.index];
       this.title = task.title;
       this.checklist = task.checklist;
+      this.taskBeforeChanges = Object.assign({}, task);
     }
+  },
+  beforeRouteLeave(to, from, next) {
+    this.toggleConfirmModal({
+      show: true,
+      text: "Несохраненные изменения удалятся. Вы действительно хотите вернуться к списку?",
+      confirmFunc: {
+        func: next
+      }
+    });
   }
 };
 </script>

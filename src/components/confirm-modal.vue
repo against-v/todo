@@ -4,7 +4,7 @@
       .modal__text {{text}}
       .modal__buttons-container
         button.button.button_paint-main(
-        @click.prevent="confirmFunc.func.apply(this, confirmFunc.params)"
+        @click.prevent="onButtonConfirmClick"
         ) Да
         button.button(
         @click.prevent="$emit('close')"
@@ -20,7 +20,6 @@ export default {
       type: String,
       default: "Подтвердите действие"
     },
-
     confirmFunc: {
       func: {
         type: Function
@@ -28,6 +27,12 @@ export default {
       params: {
         type: Array
       }
+    }
+  },
+  methods: {
+    onButtonConfirmClick() {
+      this.confirmFunc.func.apply(this, this.confirmFunc.params);
+      this.$emit("close");
     }
   }
 };
