@@ -1,8 +1,12 @@
 <template lang="pug">
   .modal-wrapper
     .modal
-      .modal__text
+      .modal__text {{text}}
       .modal__buttons-container
+        button.button.button_paint-main Да
+        button.button(
+        @click.prevent="$emit('close')"
+        ) Нет
 
 </template>
 
@@ -12,7 +16,11 @@ export default {
   props: {
     text: {
       type: String,
-      default: ""
+      default: "Подтвердите действие"
+    },
+
+    confirmFunc: {
+      type: Function
     }
   }
 };

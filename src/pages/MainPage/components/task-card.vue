@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
   name: "task-card",
   props: {
@@ -35,12 +36,22 @@ export default {
   },
   computed: {
     checklist() {
-      return this.card.checklist.slice(0,3);
+      return this.card.checklist.slice(0, 3);
+    }
+  },
+  data() {
+    return {
+
     }
   },
   methods: {
-    onRemoveCard(id) {
-      console.log(id);
+    ...mapMutations(["toggleConfirmModal"]),
+    onRemoveCard() {
+      this.toggleConfirmModal({
+        show: true,
+        text: "Вы действительно хотите удалить список?",
+        confirmFunc: null
+      })
     }
   }
 };

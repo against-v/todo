@@ -1,0 +1,30 @@
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal {
+  width: 300px;
+  border-radius: 4px;
+  background-color: $color-white;
+  padding: 20px;
+}
+.modal__text {
+  margin-bottom: 10px;
+}
+.modal__buttons-container {
+  display: flex;
+  .button {
+    width: 100%;
+    margin-left: 20px;
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
