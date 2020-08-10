@@ -27,6 +27,7 @@
               :data="item"
               :index="$index"
               @on-change="onChangeCheckEl"
+              @remove="onRemoveCheckEl"
               )
             .checklist__item.checklist__item_button
 
@@ -81,16 +82,18 @@ export default {
     onChangeCheckEl(value, field, index) {
       this.checklist[index][field] = value;
     },
+    onRemoveCheckEl(index) {
+      this.checklist.splice(index, 1);
+    },
     onSaveTask() {
-      const index = this.index < 0 ? this.taskList.length : this.index;
       this.createTask({
         task: {
           title: this.title,
           checklist: this.checklist
         },
-        index: index
+        index: this.index
       });
-      this.$router.replace({name: "TaskEditor", params: {id: index + 1}});
+      this.$router.push({name: "MainPage"});
     },
     confirmRemove() {
       this.toggleConfirmModal({

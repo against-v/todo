@@ -12,7 +12,9 @@
       v-model="title"
       )
     .check-el__button
-      button.button-square.button-square_remove
+      button.button-square.button-square_remove(
+      @click.prevent="$emit('remove', index)"
+      )
 
 </template>
 
