@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapActions } from "vuex";
 import CheckEl from "@/pages/TaskEditor/components/check-el";
 export default {
   name: "TaskPage",
@@ -57,7 +57,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["saveTask"]),
+    ...mapActions(["createTask"]),
     onAddCheckEl() {
       this.checklist.push({
         title: "",
@@ -68,7 +68,7 @@ export default {
       this.checklist[index][field] = value;
     },
     onSaveTask() {
-      this.saveTask({
+      this.createTask({
         task: {
           title: this.title,
           checklist: this.checklist

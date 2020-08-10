@@ -7,7 +7,7 @@
         :to="{name: 'TaskEditor', params: {id: index + 1}}"
         )
         button.button-square.button-square_remove(
-        @click.prevent="onRemoveCard(index)"
+        @click.prevent="confirmRemove(index)"
         )
     .card__body
       .card__checklist.card-checklist
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapActions } from "vuex";
 export default {
   name: "task-card",
   props: {
@@ -46,13 +46,22 @@ export default {
   },
   methods: {
     ...mapMutations(["toggleConfirmModal"]),
-    onRemoveCard() {
+    ...mapActions(["removeTask"]),
+    confirmRemove() {
       this.toggleConfirmModal({
         show: true,
         text: "Вы действительно хотите удалить список?",
-        confirmFunc: null
+        confirmFunc: {
+          func: this.onRemoveTask,
+          params: [this.index]
+        }
       })
+    },
+    onRemoveTask(index) {
+      this.removeTask(index);
+      this.toggleConfirmModal({show: false});
     }
+
   }
 };
 </script>
