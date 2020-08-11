@@ -98,6 +98,12 @@ body {
     background-color: $color-main;
     color: $color-white;
   }
+  &:disabled {
+    opacity: .7;
+    cursor: default;
+    color: $color-white;
+    background-color: $color-grey;
+  }
 }
 
 .button-square {

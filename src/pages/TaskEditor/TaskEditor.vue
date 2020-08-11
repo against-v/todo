@@ -32,6 +32,16 @@
             .checklist__item.checklist__item_button
     .button-container
       button.button.button_full(
+        @click.prevent="cancelChanges"
+        :disabled="!isChanged"
+      ) Отменить изменения
+    .button-container
+      button.button.button_full(
+        @click.prevent="returnChanges"
+        :disabled="!taskAfterChanges"
+      ) Вернуть изменения
+    .button-container
+      button.button.button_full(
         @click.prevent="$router.push({name: 'MainPage'})"
       ) Вернуться к списку
     .button-container
@@ -41,12 +51,13 @@
       ) Удалить
     .button-container
       button.button.button_full.button_paint-main(
+      :disabled="buttonSaveDisabled"
       @click.prevent="onSaveTask"
       ) Сохранить
 </template>
 
 <script>
-import {mapState, mapActions, mapMutations} from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 import CheckEl from "@/pages/TaskEditor/components/check-el";
 export default {
   name: "TaskPage",
@@ -65,34 +76,42 @@ export default {
     index() {
       return this.isEdit ? this.$route.params.id - 1 : -1;
     },
-    isChanged() {
-      const original = this.taskBeforeChanges;
-      if (original.title !== this.title) {
-        return true;
-      }
-      if (original.checklist.length !== this.checklist.length) {
-        return true;
-      }
-      original.checklist.forEach((item, i) => {
-        if (item.title !== this.checklist[i].title) {
-          return true;
-        }
-        if (item.checked !== this.checklist[i].checked) {
-          return true;
-        }
-      })
-      return false;
+    buttonSaveDisabled() {
+      return this.localTask.title.length === 0 || !this.isChanged;
     }
+    // isChanged() {
+    //   const original = this.taskBeforeChanges;
+    //   if (original.title !== this.title) {
+    //     return true;
+    //   }
+    //   if (original.checklist.length !== this.checklist.length) {
+    //     return true;
+    //   }
+    //   original.checklist.forEach((item, i) => {
+    //     if (item.title !== this.checklist[i].title) {
+    //       return true;
+    //     }
+    //     if (item.checked !== this.checklist[i].checked) {
+    //       return true;
+    //     }
+    //   });
+    //   return false;
+    // }
   },
   data() {
     return {
       localTask: {
         title: "",
-        checklist: [],
+        checklist: []
       },
+      taskBeforeChanges: {
+        title: "",
+        checklist: []
+      },
+      taskAfterChanges: null,
       checkListInput: "",
-      taskBeforeChanges: null,
-      requireCheck: true
+      requireCheck: true,
+      isChanged: false
     };
   },
   methods: {
@@ -117,7 +136,7 @@ export default {
         index: this.index
       });
       this.requireCheck = false;
-      this.$router.push({name: "MainPage"});
+      this.$router.push({ name: "MainPage" });
     },
     confirmRemove() {
       this.toggleConfirmModal({
@@ -127,12 +146,20 @@ export default {
           func: this.onRemoveTask,
           params: [this.index]
         }
-      })
+      });
     },
     onRemoveTask(index) {
       this.requireCheck = false;
-      this.$router.push({name: "MainPage"});
+      this.$router.push({ name: "MainPage" });
       this.removeTask(index);
+    },
+    cancelChanges() {
+      this.taskAfterChanges = JSON.parse(JSON.stringify(this.localTask));
+      this.localTask = JSON.parse(JSON.stringify(this.taskBeforeChanges));
+    },
+    returnChanges() {
+      this.localTask = JSON.parse(JSON.stringify(this.taskAfterChanges));
+      this.taskAfterChanges = null;
     },
     checkChanges() {
       const original = this.taskBeforeChanges;
@@ -144,7 +171,10 @@ export default {
         return true;
       }
       const diff = original.checklist.findIndex((item, i) => {
-        return item.title !== current.checklist[i].title || item.checked !== current.checklist[i].checked;
+        return (
+          item.title !== current.checklist[i].title ||
+          item.checked !== current.checklist[i].checked
+        );
       });
       if (diff > -1) {
         return true;
@@ -154,27 +184,33 @@ export default {
   },
   created() {
     if (this.isEdit) {
+      this.taskBeforeChanges = JSON.parse(
+        JSON.stringify(this.taskList[this.index])
+      );
       this.localTask = JSON.parse(JSON.stringify(this.taskList[this.index]));
     }
-    this.taskBeforeChanges = JSON.parse(JSON.stringify(this.localTask));
   },
   beforeRouteLeave(to, from, next) {
-    const revertChanges = () => {
-      this.localTask = JSON.parse(JSON.stringify(this.taskBeforeChanges));
-      next();
-    };
-    if (this.requireCheck && this.checkChanges()) {
+    if (this.requireCheck && this.isChanged) {
       this.toggleConfirmModal({
         show: true,
-        text: "Несохраненные изменения удалятся. Вы действительно хотите вернуться к списку?",
+        text:
+          "Несохраненные изменения удалятся. Вы действительно хотите вернуться к списку?",
         confirmFunc: {
-          func: revertChanges
+          func: next
         }
       });
     } else {
       next();
     }
-
+  },
+  watch: {
+    localTask: {
+      handler: function() {
+        this.checkChanges() ? this.isChanged = true : this.isChanged = false;
+      },
+      deep: true
+    }
   }
 };
 </script>
