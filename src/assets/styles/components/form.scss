@@ -31,7 +31,7 @@
 }
 
 .checklist__add {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 .checklist-add {
   display: flex;
@@ -99,5 +99,18 @@
     & ~ .checkbox__icon {
       background-image: url('../images/icons/checkbox-active.svg');
     }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .checklist-add {
+    flex-wrap: wrap;
+  }
+  .checklist-add__input {
+    width: 100%;
+  }
+  .checklist-add__button {
+    margin-top: 10px;
+    margin-left: 0;
   }
 }
