@@ -97,12 +97,14 @@ body {
   &_paint-main {
     background-color: $color-main;
     color: $color-white;
+    border-color: $color-main;
   }
   &:disabled {
-    opacity: .7;
-    cursor: default;
-    color: $color-white;
-    background-color: $color-grey;
+    opacity: .4;
+    cursor: not-allowed;
+    background-color: $color-white;
+    color: $color-black;
+    border-color: $color-line;
   }
 }
 
@@ -117,15 +119,47 @@ body {
   background-position: center center;
   background-repeat: no-repeat;
   cursor: pointer;
+  &:disabled {
+    opacity: .4;
+    cursor: not-allowed;
+  }
   &_edit {
-    background-image: url('../images/icons/icon-edit.svg');
+    background-image: url('../images/icons/write_24.svg');
   }
   &_remove {
-    background-image: url('../images/icons/icon-remove.svg');
+    background-image: url('../images/icons/delete_24.svg');
+  }
+  &_cancel-changes {
+    background-image: url('../images/icons/replay_24.svg');
+  }
+  &_return-changes {
+    background-image: url('../images/icons/refresh_24.svg');
+  }
+  &_back {
+    background-image: url('../images/icons/back_24.svg');
   }
 }
 .button-container {
   width: 100%;
   max-width: 300px;
   margin: 20px auto;
+}
+
+.control-panel {
+  display: flex;
+  .button-square {
+    width: 50px;
+    height: 50px;
+    border-width: 2px;
+  }
+  .button {
+    border-width: 2px;
+  }
+}
+.control-panel__item {
+  flex-shrink: 0;
+  margin-left: 10px;
+  &:first-child {
+    margin-left: 0;
+  }
 }

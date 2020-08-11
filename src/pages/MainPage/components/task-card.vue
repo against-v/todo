@@ -5,9 +5,11 @@
       .card__controls
         router-link.button-square.button-square_edit(
         :to="{name: 'TaskEditor', params: {id: index + 1}}"
+        title="Редактировать"
         )
         button.button-square.button-square_remove(
         @click.prevent="confirmRemove(index)"
+        title="Удалить"
         )
     .card__body
       .card__checklist.card-checklist

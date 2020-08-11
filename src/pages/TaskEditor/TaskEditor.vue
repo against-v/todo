@@ -29,31 +29,37 @@
               @on-change="onChangeCheckEl"
               @remove="onRemoveCheckEl"
               )
-            .checklist__item.checklist__item_button
-    .button-container
-      button.button.button_full(
-        @click.prevent="cancelChanges"
-        :disabled="!isChanged"
-      ) Отменить изменения
-    .button-container
-      button.button.button_full(
-        @click.prevent="returnChanges"
-        :disabled="!taskAfterChanges"
-      ) Вернуть изменения
-    .button-container
-      button.button.button_full(
-        @click.prevent="$router.push({name: 'MainPage'})"
-      ) Вернуться к списку
-    .button-container
-      button.button.button_full(
-        v-if="isEdit"
-        @click.prevent="confirmRemove"
-      ) Удалить
-    .button-container
-      button.button.button_full.button_paint-main(
-      :disabled="buttonSaveDisabled"
-      @click.prevent="onSaveTask"
-      ) Сохранить
+      .form__el
+        .control-panel
+          .control-panel__item
+            button.button-square.button-square_back(
+              @click.prevent="$router.push({name: 'MainPage'})"
+              title="Вернуться к списку"
+            )
+          .control-panel__item
+            button.button-square.button-square_cancel-changes(
+              @click.prevent="cancelChanges"
+              :disabled="!isChanged"
+              title="Отменить изменения"
+            )
+          .control-panel__item
+            button.button-square.button-square_return-changes(
+              @click.prevent="returnChanges"
+              :disabled="!taskAfterChanges"
+              title="Вернуть изменения"
+            )
+          .control-panel__item
+            button.button-square.button-square_remove(
+              v-if="isEdit"
+              @click.prevent="confirmRemove"
+              title="Удалить"
+            )
+          .control-panel__item
+            button.button.button_full.button_paint-main(
+              :disabled="buttonSaveDisabled"
+              @click.prevent="onSaveTask"
+            ) Сохранить
+
 </template>
 
 <script>
