@@ -29,7 +29,7 @@
               @on-change="onChangeCheckEl"
               @remove="onRemoveCheckEl"
               )
-      .form__el
+      .form__el.form__el_controls
         .control-panel
           .control-panel__item
             button.button-square.button-square_back(
@@ -56,7 +56,7 @@
             )
           .control-panel__item
             button.button.button_full.button_paint-main(
-              :disabled="buttonSaveDisabled"
+              :disabled="!this.isChanged"
               @click.prevent="onSaveTask"
             ) Сохранить
 
@@ -81,28 +81,7 @@ export default {
     },
     index() {
       return this.isEdit ? this.$route.params.id - 1 : -1;
-    },
-    buttonSaveDisabled() {
-      return this.localTask.title.length === 0 || !this.isChanged;
     }
-    // isChanged() {
-    //   const original = this.taskBeforeChanges;
-    //   if (original.title !== this.title) {
-    //     return true;
-    //   }
-    //   if (original.checklist.length !== this.checklist.length) {
-    //     return true;
-    //   }
-    //   original.checklist.forEach((item, i) => {
-    //     if (item.title !== this.checklist[i].title) {
-    //       return true;
-    //     }
-    //     if (item.checked !== this.checklist[i].checked) {
-    //       return true;
-    //     }
-    //   });
-    //   return false;
-    // }
   },
   data() {
     return {
