@@ -74,15 +74,14 @@
     position: absolute;
     top: 2px;
     left: 0;
-    border-radius: 50%;
-    background-color: $color-grey;
+    background-image: url('../images/icons/checkbox-normal.svg');
   }
   &:last-child {
     margin-bottom: 0;
   }
   &_checked {
     &::before {
-      background-color: $color-main;
+      background-image: url('../images/icons/checkbox-active.svg');
     }
   }
 }
